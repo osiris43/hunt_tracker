@@ -1,0 +1,3 @@
+alias DrawHunts.{Repo,Hunt}
+
+Repo.insert(%Hunt{type: "Special Permit Hunts", category: "General Feral Hog",start_date: sd, end_date: ed, location: "Fort Boggy SP", bag_limit: ["Unlimited Feral Hogs"], means: "All Archery OR Shotguns with slugs or buckshot", method: "Compartment; Hunters may bring portable blinds. Use of ATVs allowed.", baiting: true, permits: 5, fee: 0})
