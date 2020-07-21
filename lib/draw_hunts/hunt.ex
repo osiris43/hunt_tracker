@@ -17,6 +17,7 @@ defmodule DrawHunts.Hunt do
     field :previous_year_success, :integer
     field :start_date, :date
     field :type, :string
+    field :alldates, {:array, :date}
 
     timestamps()
   end
@@ -24,7 +25,8 @@ defmodule DrawHunts.Hunt do
   @doc false
   def changeset(hunt, attrs) do
     hunt
-    |> cast(attrs, [:type, :category, :start_date, :end_date, :location, :bag_limit, :means, :method, :baiting, :permits, :fee, :previous_year_applicants, :previous_year_permits, :previous_year_success])
+    |> cast(attrs, [:type, :category, :start_date, :end_date, :location, :bag_limit, :means, :method, :baiting, :permits, :fee, :previous_year_applicants, :previous_year_permits, :previous_year_success, :alldates])
     |> validate_required([:type, :category, :start_date, :end_date, :location, :bag_limit, :method, :permits, :fee])
   end
+
 end
