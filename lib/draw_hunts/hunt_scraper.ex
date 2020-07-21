@@ -1,12 +1,15 @@
 defmodule DrawHunts.HuntScraper do
+  use Timex
+
   alias DrawHunts.Hunt
+  alias DrawHunts.Repo
 
   def scrape() do
     hunt_page = get_hunts("ADE")
     category = Floki.find(hunt_page, ".package-title") |> Floki.text |> String.trim
     current_hunts = Enum.map(Floki.find(hunt_page, "section"), fn(x) -> parse_hunt(x, category) end )
     final = Enum.reduce(current_hunts, [], fn(h, acc) -> acc ++ duplicate_hunt(h) end )
-    IO.puts(Enum.count(final))
+    Enum.map(final, fn(x) -> Repo.insert!(x) end )
   end
 
   def get_hunts(category) do
@@ -15,8 +18,16 @@ defmodule DrawHunts.HuntScraper do
   end
 
   def duplicate_hunt(hunt) do
-    Enum.map(hunt.alldates, fn(date) -> %{hunt | start_date: Enum.at(date, 0), end_date: Enum.at(date, 1)} end )
+    Enum.map(hunt.alldates, fn(date) ->
+      %{hunt | start_date: parse_hunt_date(date, 0), end_date: parse_hunt_date(date, 1)} end )
   end
+
+  def parse_hunt_date(huntdate, idx) do
+    # takes a string in format Oct 13, 2020 – Oct 15, 2020 and returns start or end
+    {:ok, dt} = String.split(huntdate, "\u2013") |> Enum.at(idx) |> String.trim |> Timex.parse("%b %d, %Y", :strftime)
+    Timex.to_date(dt)
+  end
+
   def parse_hunt(hunt_section, category) do
     hunt =%Hunt{}
     hunt = %{hunt | location: Floki.find(hunt_section, ".title") |> Floki.text,
@@ -87,8 +98,7 @@ defmodule DrawHunts.HuntScraper do
   def parse_single_huntdate(data) do
     Floki.children(data)
     |> Enum.at(0)
-    |> String.split("\u2013")
-    |> Enum.map(fn(x) -> String.trim(x) end)
+    |> String.trim
   end
 
   def parse_limits([head | tail], limits) do

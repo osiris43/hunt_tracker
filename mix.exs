@@ -44,7 +44,8 @@ defmodule DrawHunts.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.7.0"},
-      {:floki, "~> 0.27.0"}
+      {:floki, "~> 0.27.0"},
+      {:timex, "~> 3.5"}
     ]
   end
 

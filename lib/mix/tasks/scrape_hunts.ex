@@ -4,7 +4,8 @@ defmodule Mix.Tasks.ScrapeHunts do
   alias DrawHunts.HuntScraper
 
   def run(_) do
-    Application.ensure_all_started(:hackney)
+    #Application.ensure_all_started(:hackney)
+    Mix.Task.run "app.start"
     HuntScraper.scrape()
   end
 end

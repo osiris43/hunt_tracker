@@ -17,7 +17,7 @@ defmodule DrawHunts.Hunt do
     field :previous_year_success, :integer
     field :start_date, :date
     field :type, :string
-    field :alldates, {:array, :date}
+    field :alldates, {:array, :string}
 
     timestamps()
   end
