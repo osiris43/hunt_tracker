@@ -8,9 +8,9 @@ defmodule DrawHunts.Repo.Migrations.CreateHunts do
       add :start_date, :date
       add :end_date, :date
       add :location, :string
-      add :bag_limit, {:array, :string}
+      add :bag_limit, {:array, :text}
       add :means, :string
-      add :method, :string
+      add :method, :text
       add :baiting, :boolean, default: false, null: false
       add :permits, :integer
       add :fee, :integer

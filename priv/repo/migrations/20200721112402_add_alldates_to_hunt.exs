@@ -3,7 +3,7 @@ defmodule DrawHunts.Repo.Migrations.AddAlldatesToHunt do
 
   def change do
     alter table(:hunts) do
-      add :alldates, {:array, :date}
+      add :alldates, {:array, :string}
     end
   end
 end
