@@ -1,4 +1,4 @@
-defmodule DrawHunts.Hunt do
+defmodule DrawHunts.HuntDetails.Hunt do
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,7 +1,7 @@
 defmodule DrawHunts.HuntScraper do
   use Timex
 
-  alias DrawHunts.Hunt
+  alias DrawHunts.HuntDetails.Hunt
   alias DrawHunts.Repo
 
   def scrape() do
