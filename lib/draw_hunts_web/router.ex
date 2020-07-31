@@ -13,6 +13,12 @@ defmodule DrawHuntsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", DrawHuntsWeb do
+    pipe_through :api
+
+    get "/hunts", HuntController, :index
+  end
+
   scope "/", DrawHuntsWeb do
     pipe_through :browser
 
