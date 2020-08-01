@@ -2,14 +2,28 @@ defmodule DrawHunts.HuntScraper do
   use Timex
 
   alias DrawHunts.HuntDetails.Hunt
+  alias DrawHunts.HuntDetails.Category
   alias DrawHunts.Repo
 
-  def scrape(category) do
-    hunt_page = get_hunts(category)
+  def scrape(cat_abbr) do
+    hunt_page = get_hunts(cat_abbr)
     category = Floki.find(hunt_page, ".package-title") |> Floki.text |> String.trim
     current_hunts = Enum.map(Floki.find(hunt_page, "section"), fn(x) -> parse_hunt(x, category) end )
     final = Enum.reduce(current_hunts, [], fn(h, acc) -> acc ++ duplicate_hunt(h) end )
     Enum.map(final, fn(x) -> Repo.insert!(x) end )
+    deadline_info = Floki.find(hunt_page, ".deadline")
+    save_category(category, deadline_info)
+  end
+
+  def save_category(category, deadline_data) do
+    {:ok, deadline } = Floki.text(deadline_data)
+    |> String.split(":")
+    |> Enum.at(1)
+    |> String.trim
+    |> Timex.parse("%B %d, %Y", :strftime)
+
+    hunt_cat =%Category{description: category, deadline: Timex.to_date(deadline)}
+    Repo.insert!(hunt_cat)
   end
 
   def get_hunts(category) do
