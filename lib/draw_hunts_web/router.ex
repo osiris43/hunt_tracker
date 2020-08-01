@@ -17,6 +17,7 @@ defmodule DrawHuntsWeb.Router do
     pipe_through :api
 
     get "/hunts", HuntController, :index
+    get "/categories", CategoryController, :index
   end
 
   scope "/", DrawHuntsWeb do

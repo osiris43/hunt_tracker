@@ -1,16 +1,16 @@
 import {useEffect, useState} from 'react';
 import {Service} from '../types/service';
-import {Hunt} from '../types/hunt';
+import {Category} from '../types/category';
 
-export interface Hunts{
-    data: Hunt[];
+export interface Categories{
+    data: Category[];
   }
 
-const useHuntService = () => {
-    const [result, setResult] = useState<Service<Hunts>>({status: 'loading'});
+const useCategoryService = () => {
+    const [result, setResult] = useState<Service<Categories>>({status: 'loading'});
 
     useEffect(() => {
-        fetch('/api/hunts')
+        fetch('/api/categories')
         .then(response => response.json())
         .then(response => setResult({ status: 'loaded', payload: response}))
         .catch(error => setResult({ status: 'error', error }));
@@ -19,4 +19,4 @@ const useHuntService = () => {
     return result;
 }
 
-export default useHuntService;
+export default useCategoryService;

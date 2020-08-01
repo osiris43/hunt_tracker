@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import Main from '../components/Main';
 import UpcomingHunts from '../components/UpcomingHunts'; 
+import UpcomingDeadlines from '../components/UpcomingDeadlines'; 
 
 const HomePage: React.FC<RouteComponentProps> = () => (
   <Main>
@@ -24,6 +25,7 @@ const HomePage: React.FC<RouteComponentProps> = () => (
 
     <section className="row">
         <UpcomingHunts />
+        <UpcomingDeadlines />
     </section>
 
     <section className="row">

@@ -7,6 +7,7 @@ defmodule DrawHunts.HuntDetails do
   alias DrawHunts.Repo
 
   alias DrawHunts.HuntDetails.Hunt
+  alias DrawHunts.HuntDetails.Category
 
   @doc """
   Returns the list of hunts.
@@ -24,7 +25,6 @@ defmodule DrawHunts.HuntDetails do
       order_by: :start_date
 
     Repo.all(query)
-
   end
 
   @doc """
@@ -99,5 +99,24 @@ defmodule DrawHunts.HuntDetails do
   """
   def change_hunt(%Hunt{} = hunt) do
     raise "TODO"
+  end
+
+
+  @doc """
+  Returns the list of hunt categories.
+
+  ## Examples
+
+      iex> list_hunt_categories()
+      [%Category{}, ...]
+
+  """
+  def list_hunt_categories do
+    query = from hc in Category,
+      select: hc,
+      limit: 5,
+      order_by: :deadline
+
+    Repo.all(query)
   end
 end
