@@ -4,8 +4,8 @@ defmodule DrawHunts.HuntScraper do
   alias DrawHunts.HuntDetails.Hunt
   alias DrawHunts.Repo
 
-  def scrape() do
-    hunt_page = get_hunts("ADE")
+  def scrape(category) do
+    hunt_page = get_hunts(category)
     category = Floki.find(hunt_page, ".package-title") |> Floki.text |> String.trim
     current_hunts = Enum.map(Floki.find(hunt_page, "section"), fn(x) -> parse_hunt(x, category) end )
     final = Enum.reduce(current_hunts, [], fn(h, acc) -> acc ++ duplicate_hunt(h) end )
@@ -84,7 +84,7 @@ defmodule DrawHunts.HuntScraper do
 
   def parse("Last Year", cells, hunt) do
     applicants = Enum.at(cells, 0) |> Floki.text |> String.split(":") |> Enum.at(1) |> String.trim |> String.to_integer()
-    permits = Enum.at(cells, 1) |> Floki.text |> String.split(":") |> Enum.at(1) |> String.trim |> String.to_integer()
+    permits = Enum.at(cells, 1) |> Floki.text |> String.split(":") |> Enum.at(1) |> String.trim |> last_year_permits
     parsed = Enum.at(cells, 2) |> Floki.text |> String.split(":") |> Enum.at(1) |> String.trim()
     success = 0
     if String.ends_with?(parsed, "%"), do: success = String.slice(parsed, 0..-2) |> String.to_integer()
@@ -93,6 +93,9 @@ defmodule DrawHunts.HuntScraper do
       previous_year_permits: permits, previous_year_success: success}
   end
 
+  def last_year_permits(html) do
+    if String.length(html) > 0, do: String.to_integer(html), else: 0
+  end
   def parse(_, _, hunt), do: hunt
 
   def parse_single_huntdate(data) do

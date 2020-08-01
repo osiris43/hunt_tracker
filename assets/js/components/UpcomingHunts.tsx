@@ -2,7 +2,7 @@ import * as React from "react";
 import useHuntService from "../services/huntService";
 import Loader from './Loader';
 
-const UpcomingHunts: React.FC<{}> = () => {
+const UpcomingHunts: React.FC = () => {
     const service = useHuntService();
 
     return (
@@ -11,7 +11,7 @@ const UpcomingHunts: React.FC<{}> = () => {
             {service.status === 'loading' && <div><Loader /></div>}
             {service.status === 'loaded' &&
                 service.payload.data.map(hunt => (
-                <div key={hunt.id}>{hunt.start_date} {hunt.location}</div>
+                <div key={hunt.id}>{hunt.start_date} {hunt.category} {hunt.location}</div>
         ))}
         </div>
         {service.status === 'error' && (

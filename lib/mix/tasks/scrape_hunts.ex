@@ -3,9 +3,10 @@ defmodule Mix.Tasks.ScrapeHunts do
 
   alias DrawHunts.HuntScraper
 
-  def run(_) do
-    #Application.ensure_all_started(:hackney)
+  def run(params) do
+    {args, _, _} = OptionParser.parse(params, strict: [category: :string])
+
     Mix.Task.run "app.start"
-    HuntScraper.scrape()
+    HuntScraper.scrape(args[:category])
   end
 end
