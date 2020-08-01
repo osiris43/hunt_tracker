@@ -3,7 +3,7 @@ import {Service} from '../types/service';
 import {Hunt} from '../types/hunt';
 
 export interface Hunts{
-    results: Hunt[];
+    data: Hunt[];
   }
 
 const useHuntService = () => {
