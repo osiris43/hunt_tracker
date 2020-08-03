@@ -112,7 +112,9 @@ defmodule DrawHunts.HuntDetails do
 
   """
   def list_hunt_categories do
+    now = DateTime.utc_now()
     query = from hc in Category,
+      where: hc.deadline > ^now,
       select: hc,
       limit: 5,
       order_by: :deadline

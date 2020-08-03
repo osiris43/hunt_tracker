@@ -3,25 +3,18 @@ import { RouteComponentProps, Link } from 'react-router-dom';
 import Main from '../components/Main';
 import UpcomingHunts from '../components/UpcomingHunts'; 
 import UpcomingDeadlines from '../components/UpcomingDeadlines'; 
+import {Jumbotron} from 'react-bootstrap';
 
 const HomePage: React.FC<RouteComponentProps> = () => (
   <Main>
-    <section className="phx-hero">
-      <h1>Welcome to random!</h1>
+    <Jumbotron>
+      <h1>Welcome to Draw Hunts Tracker!</h1>
       <p>
         A productive web framework that
         <br />
         does not compromise speed and maintainability.
       </p>
-      <p>
-        <Link className="button" to="/counter">
-          Counter example
-        </Link>{' '}
-        <Link className="button button-outline" to="/fetch-data">
-          API example
-        </Link>
-      </p>
-    </section>
+    </Jumbotron>    
 
     <section className="row">
         <UpcomingHunts />
