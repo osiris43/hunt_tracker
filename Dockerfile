@@ -1,19 +1,28 @@
-# ./Dockerfile
+FROM elixir:1.9
 
-# Extend from the official Elixir image
-FROM elixir:latest
+RUN apt-get update
+RUN apt-get install --yes postgresql-client
+RUN apt-get install make gcc libc-dev
 
-# Create app directory and copy the Elixir projects into it
-RUN mkdir /app
+# install hex package manager
+RUN mix local.hex --force
+RUN mix local.rebar --force
+
+# install the latest version of Phoenix
+RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez --force
+
+# install NodeJS and NPM
+RUN curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
+RUN apt-get install nodejs
+RUN apt-get install -y inotify-tools
+
+# copy our code into a new directory named 'app' it and set it as our working directory
 COPY . /app
 WORKDIR /app
 
-# Install hex package manager
-# By using --force, we don’t need to type “Y” to confirm the installation
-RUN mix local.hex --force
-RUN mix local.rebar --force
-RUN mix deps.get
-# Compile the project
-RUN mix do compile
-
-CMD ["/app/entrypoint.sh"]
+# Convert run.sh to an executable file
+# (Note: this file will run every time the container starts up)
+COPY run.sh /run.sh
+RUN ["chmod", "+x", "/run.sh"]
+ENTRYPOINT ["/run.sh"]

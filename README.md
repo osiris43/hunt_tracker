@@ -1,5 +1,13 @@
 # DrawHunts
 
+# Docker
+To run with docker, run `docker-compose up`.  To then pull some data in, run `docker-compose exex phoenix mix scrape_hunts category="GDE"`.  
+
+# Without Docker
+Prerequisites: Elixir, Phoenix and Postgres.
+
+Change dev.ex config to use localhost for the host instead of postgres.
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
