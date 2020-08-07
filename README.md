@@ -2,7 +2,7 @@
 
 # Docker
 
-To run with docker, run `docker-compose up`. To then pull some data in, run `docker-compose exec phoenix mix scrape_hunts category="GDE"`.
+To run with docker, run `docker-compose up`. To then pull some data in, run `docker-compose exec phoenix mix scrape_hunts --category "GDE"`.
 
 # Without Docker
 
