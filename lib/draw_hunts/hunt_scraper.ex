@@ -16,6 +16,8 @@ defmodule DrawHunts.HuntScraper do
   end
 
   def save_category(category, deadline_data) do
+    IO.inspect(category)
+
     {:ok, deadline } = Floki.text(deadline_data)
     |> String.split(":")
     |> Enum.at(1)

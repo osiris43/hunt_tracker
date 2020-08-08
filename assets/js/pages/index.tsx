@@ -3,10 +3,12 @@ import { RouteComponentProps, Link } from 'react-router-dom';
 import Main from '../components/Main';
 import UpcomingHunts from '../components/UpcomingHunts'; 
 import UpcomingDeadlines from '../components/UpcomingDeadlines'; 
+import MainNavigation from '../components/MainNavigation'; 
 import {Jumbotron} from 'react-bootstrap';
 
 const HomePage: React.FC<RouteComponentProps> = () => (
   <Main>
+    <MainNavigation />
     <Jumbotron>
       <h1>Welcome to Draw Hunts Tracker!</h1>
       <p>

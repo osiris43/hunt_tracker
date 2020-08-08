@@ -3,9 +3,9 @@ use Mix.Config
 # Configure your database
 config :draw_hunts, DrawHunts.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "postgrs",
   database: "draw_hunts_dev",
-  hostname: "postgres",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10,
   migration_timestamps: [type: :utc_datetime]
