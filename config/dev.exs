@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :draw_hunts, DrawHunts.Repo,
   username: "postgres",
-  password: "postgrs",
+  password: "postgres",
   database: "draw_hunts_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
