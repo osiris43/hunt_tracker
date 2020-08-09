@@ -26,9 +26,14 @@ services:
     environment:
       POSTGRES_USER: "postgres" 
       POSTGRES_PASSWORD: "postgres" 
+      PG_DATA: /var/lib/postgresql/data/pgdata
       #POSTGRES_DB: "draw_hunts_dev"
       PGDATA: /tmp
       POOL: 100
     restart: always
     ports:
       - 5432:5432
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+volumes: 
+  pgdata:
