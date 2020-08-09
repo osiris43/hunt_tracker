@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Navbar, NavDropdown, Nav, Form, FormControl, Button, NavItem} from 'react-bootstrap';
+import {Navbar, NavDropdown, Nav, Form, FormControl, Button} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import MyHunts from "./MyHunts";
 
