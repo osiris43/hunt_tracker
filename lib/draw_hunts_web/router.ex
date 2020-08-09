@@ -1,5 +1,6 @@
 defmodule DrawHuntsWeb.Router do
   use DrawHuntsWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -18,6 +19,12 @@ defmodule DrawHuntsWeb.Router do
 
     get "/hunts", HuntController, :index
     get "/categories", CategoryController, :index
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
   end
 
   scope "/", DrawHuntsWeb do

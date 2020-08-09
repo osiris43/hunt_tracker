@@ -42,5 +42,6 @@ defmodule DrawHuntsWeb.Endpoint do
     key: "_draw_hunts_key",
     signing_salt: "k7E2G9z0"
 
+  plug Pow.Plug.Session, otp_app: :draw_hunts
   plug DrawHuntsWeb.Router
 end
